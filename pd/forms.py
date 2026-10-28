@@ -31,8 +31,8 @@ class InstitutionalTeamForm(forms.ModelForm):
 
     'contact_number': forms.TextInput(attrs={
         'placeholder': 'Enter 10-digit mobile number',
-        'maxlength': '10',
-        'inputmode': 'numeric',
+        'maxlength': '15',
+        'inputmode': 'tel',
     }),
 
     'email': forms.EmailInput(attrs={
@@ -49,8 +49,8 @@ class InstitutionalTeamForm(forms.ModelForm):
 
     'alt_contact_number': forms.TextInput(attrs={
         'placeholder': 'Enter alternate 10-digit mobile number',
-        'maxlength': '10',
-        'inputmode': 'numeric',
+        'maxlength': '15',
+        'inputmode': 'tel',
     }),
 }
 #RAJNISH END

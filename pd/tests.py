@@ -99,8 +99,8 @@ class InstitutionalTeamModelTests(TestCase):
                 self.assertIn(field, ctx.exception.message_dict)
 
     def test_valid_phone_numbers_pass(self):
-        """10 digits starting with 6, 7, 8 or 9 are accepted."""
-        for number in ["6000000000", "7123456789", "8123456789", "9876543210"]:
+        """10 digits starting with 6, 7, 8 or 9 are accepted, with or without +91 prefix."""
+        for number in ["6000000000", "7123456789", "8123456789", "9876543210", "+919876543210", "+91 9876543210", "+91-9876543210"]:
             with self.subTest(number=number):
                 make_team(contact_number=number, alt_contact_number="").full_clean()
 
@@ -110,9 +110,9 @@ class InstitutionalTeamModelTests(TestCase):
             "5876543210",   # starts with 5
             "0123456789",   # starts with 0
             "987654321",    # 9 digits
-            "98765432101",  # 11 digits (also breaks max_length)
+            "98765432101",  # 11 digits without prefix
             "98765abcde",   # letters
-            "9876 54321",   # contains a space
+            "9876 54321",   # contains an internal space
         ]
         for number in bad_numbers:
             with self.subTest(number=number):
@@ -143,7 +143,7 @@ class InstitutionalTeamModelTests(TestCase):
             ctx.exception.message_dict["alt_contact_email"],
         )
 
-    # ---- the three rules inside InstitutionalTeam.clean() ----
+    # ---- the rules inside InstitutionalTeam.clean() ----
 
     def test_clean_rejects_zero_team_and_zero_adjudicator_slots(self):
         """Requesting 0 team slots AND 0 adjudicator slots is not allowed."""
@@ -158,6 +158,14 @@ class InstitutionalTeamModelTests(TestCase):
         """Zero is fine as long as the other slot type is above zero."""
         make_team(team_slots=0, adjudicator_slots=3).full_clean()
         make_team(team_slots=3, adjudicator_slots=0).full_clean()
+
+    def test_clean_rejects_alt_name_same_as_rep_name(self):
+        with self.assertRaises(ValidationError) as ctx:
+            make_team(team_rep_names="Rajnish Kumar", alt_contact_name="rajnish kumar").full_clean()
+        self.assertIn(
+            "Alternate point of contact name must be different from team representative name.",
+            ctx.exception.message_dict["alt_contact_name"],
+        )
 
     def test_clean_rejects_alt_email_same_as_main_email(self):
         with self.assertRaises(ValidationError) as ctx:
@@ -175,14 +183,14 @@ class InstitutionalTeamModelTests(TestCase):
 
     def test_clean_rejects_alt_number_same_as_main_number(self):
         with self.assertRaises(ValidationError) as ctx:
-            make_team(contact_number="9876543210", alt_contact_number="9876543210").full_clean()
+            make_team(contact_number="9876543210", alt_contact_number="+919876543210").full_clean()
         self.assertIn(
             "Alternate number must be different from the main contact number.",
             ctx.exception.message_dict["alt_contact_number"],
         )
 
     def test_clean_collects_multiple_errors_together(self):
-        """All three clean() problems are reported at once, not one by one."""
+        """All clean() problems are reported at once, not one by one."""
         team = make_team(
             team_slots=0,
             adjudicator_slots=0,
@@ -196,11 +204,13 @@ class InstitutionalTeamModelTests(TestCase):
         self.assertIn("alt_contact_email", errors)
         self.assertIn("alt_contact_number", errors)
 
-    def test_duplicate_institutions_are_allowed(self):
-        """There is no unique constraint: the same institution can register twice."""
-        make_team().save()
-        make_team().save()
-        self.assertEqual(InstitutionalTeam.objects.count(), 2)
+    def test_duplicate_institutions_are_not_allowed(self):
+        """There is a unique constraint: the same institution cannot register twice."""
+        team1 = make_team()
+        team1.save()
+        team2 = make_team()
+        with self.assertRaises(ValidationError):
+            team2.validate_unique()
 
 
 # ---------------------------------------------------------------------------
@@ -340,7 +350,7 @@ class InstitutionalTeamFormTests(TestCase):
 
     def test_alt_number_must_differ_from_main_number(self):
         form = InstitutionalTeamForm(
-            data=valid_data(contact_number="9876543210", alt_contact_number="9876543210")
+            data=valid_data(contact_number="9876543210", alt_contact_number="+919876543210")
         )
         self.assertFalse(form.is_valid())
         self.assertIn(
@@ -410,8 +420,6 @@ class RegisterInstitutionalViewTests(TestCase):
 
     def test_valid_post_redirects_to_home(self):
         response = self.client.post(self.url, valid_data())
-        # fetch_redirect_response=False: only check WHERE we redirect,
-        # not whether the home page itself renders (that has its own test).
         self.assertRedirects(response, reverse("home"), fetch_redirect_response=False)
 
     def test_valid_post_adds_success_message(self):
@@ -428,11 +436,14 @@ class RegisterInstitutionalViewTests(TestCase):
         team = InstitutionalTeam.objects.get()
         self.assertEqual(team.alt_contact_email, "")
 
-    def test_same_institution_can_register_twice(self):
-        """No uniqueness rule exists, so a repeated submission creates a 2nd row."""
+    def test_duplicate_institution_registration_is_rejected(self):
+        """A repeated submission with the same institution name is rejected."""
         self.client.post(self.url, valid_data())
-        self.client.post(self.url, valid_data())
-        self.assertEqual(InstitutionalTeam.objects.count(), 2)
+        self.assertEqual(InstitutionalTeam.objects.count(), 1)
+        response = self.client.post(self.url, valid_data())
+        self.assertEqual(InstitutionalTeam.objects.count(), 1)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("institution_name", response.context["form"].errors)
 
     # ---- invalid POST ----
 
@@ -517,9 +528,6 @@ class HomeViewTests(TestCase):
 # Your view does NOT call send_mail() anywhere, so no confirmation email is
 # ever sent. These tests document that behaviour. Django's test runner already
 # swaps the real email backend for an in-memory one, so mail.outbox is safe.
-#
-# If you later ADD send_mail() to the view, the first test below will
-# (correctly) fail: replace it with checks on mail.outbox[0].to / .subject / .body.
 
 class EmailBehaviourTests(TestCase):
 
