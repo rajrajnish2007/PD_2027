@@ -9,4 +9,8 @@ urlpatterns=[
         views.register_adjudicator,
         name='register_adjudicator'
     ),
+    # RAJNISH START
+    path('register/cross/', views.register_cross, name='register_cross'),
+    path('register_cross/', views.register_cross, name='register_cross_direct'),
+    # RAJNISH END
 ]

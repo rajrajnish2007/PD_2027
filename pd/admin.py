@@ -27,3 +27,27 @@ class IndependentAdjudicatorAdmin(admin.ModelAdmin):
 
     list_filter = ('created_at',)
 #Ashmitha END
+
+
+# RAJNISH START
+from .models import CrossTeam
+
+
+@admin.register(CrossTeam)
+class CrossTeamAdmin(admin.ModelAdmin):
+    list_display = (
+        'team_name',
+        'team_leader_name',
+        'adjudicator_slots',
+        'contact_number',
+        'email',
+        'created_at',
+    )
+    search_fields = (
+        'team_name',
+        'team_leader_name',
+        'contact_number',
+        'email',
+    )
+    list_filter = ('created_at',)
+# RAJNISH END

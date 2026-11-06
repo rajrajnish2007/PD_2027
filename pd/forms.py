@@ -79,3 +79,54 @@ class IndependentAdjudicatorForm(forms.ModelForm):
             'alternate_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Alternate Email ID'}),
         }
 #Ashmitha End
+
+
+# RAJNISH START
+from .models import CrossTeam
+
+
+class CrossTeamForm(forms.ModelForm):
+    class Meta:
+        model = CrossTeam
+        fields = [
+            'team_name',
+            'adjudicator_slots',
+            'team_leader_name',
+            'contact_number',
+            'email',
+            'alt_contact_name',
+            'alt_contact_number',
+            'alt_contact_email',
+        ]
+        widgets = {
+            'team_name': forms.TextInput(attrs={
+                'placeholder': 'Enter team name',
+            }),
+            'adjudicator_slots': forms.NumberInput(attrs={
+                'placeholder': 'Number of adjudicator slots required',
+                'min': '0',
+            }),
+            'team_leader_name': forms.TextInput(attrs={
+                'placeholder': 'Enter team leader name',
+            }),
+            'contact_number': forms.TextInput(attrs={
+                'placeholder': 'Enter 10-digit mobile number',
+                'maxlength': '15',
+                'inputmode': 'tel',
+            }),
+            'email': forms.EmailInput(attrs={
+                'placeholder': 'Enter email ID',
+            }),
+            'alt_contact_name': forms.TextInput(attrs={
+                'placeholder': 'Enter alternate contact name (optional)',
+            }),
+            'alt_contact_number': forms.TextInput(attrs={
+                'placeholder': 'Enter alternate 10-digit mobile number (optional)',
+                'maxlength': '15',
+                'inputmode': 'tel',
+            }),
+            'alt_contact_email': forms.EmailInput(attrs={
+                'placeholder': 'Enter alternate email address (optional)',
+            }),
+        }
+# RAJNISH END
