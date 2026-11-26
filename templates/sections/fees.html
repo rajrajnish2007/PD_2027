@@ -1,0 +1,70 @@
+{% load static %}
+{% comment %} ============================================================
+   REGISTRATION FEE — Figma "Dev Handoff" › frame 4 (188:686)
+   Animations (Figma notes):
+     • Wave title (ref: motion-text-fx)
+     • "While hovering over a card it'll flip, get zoomed and come in centre" (ref: polaroid-flip-card)
+     • REGISTER buttons: shift button (ref: shift-button)
+   Desktop: cards are absolutely placed and moved by GSAP. Mobile: they stack (iPhone frame).
+   All three cards share one 482×621 layout; the side ones are the same card at 0.5 scale,
+   which is exactly the Figma ratio (241×311).
+   ============================================================ {% endcomment %}
+<section id="registration-fee" class="relative overflow-hidden bg-black px-5 pb-16 pt-16 md:px-0 md:pb-[52px] md:pt-[86px]" data-pd-fees aria-labelledby="fees-title">
+  <div class="mx-auto max-w-[1017px] text-center text-pd-cream">
+    <h2 id="fees-title" class="font-milker text-[28px] leading-none uppercase md:text-[70px]" data-pd-wave>Registration fee???</h2>
+    <p class="mx-auto mt-5 max-w-[340px] font-yoon text-[14px] leading-snug md:mt-[56px] md:max-w-none md:text-[24px]">
+      Transparent registration designed for every role - whether you speak, judge, or immerse yourself in the full experience.
+    </p>
+  </div>
+
+  <div class="pd-3d relative mx-auto mt-10 flex max-w-[482px] flex-col gap-10 md:mt-[43px] md:block md:h-[645px] md:max-w-[1440px]" data-fee-stage>
+
+    {# ---------- For the Debaters (centre on desktop) ---------- #}
+    <article class="pd-preserve group relative md:absolute md:left-1/2 md:top-0 md:-ml-[241px] md:w-[482px]"
+             data-fee-card data-fee-slot="0" data-fee-slot-default="0" data-active="true" data-active-default="true" tabindex="0"
+             aria-label="For the Debaters, ₹2400 per team">
+      <div aria-hidden="true" class="absolute inset-x-0 top-0 bottom-[24px] rounded-[20px] bg-pd-blue group-data-[fee-slot='0']:bg-pd-card-green group-data-[fee-slot='1']:bg-pd-lime transition-colors duration-300"></div>
+      <div aria-hidden="true" class="absolute inset-x-0 top-[8px] bottom-[16px] rounded-[20px] bg-pd-lime group-data-[fee-slot='0']:bg-pd-pink group-data-[fee-slot='1']:bg-pd-card-green transition-colors duration-300"></div>
+      <div aria-hidden="true" class="absolute inset-x-0 top-[16px] bottom-[8px] rounded-[20px] bg-pd-card-green group-data-[fee-slot='0']:bg-pd-blue group-data-[fee-slot='1']:bg-pd-blue transition-colors duration-300"></div>
+      <div class="relative mt-[24px] flex flex-col rounded-[20px] bg-pd-pink group-data-[fee-slot='0']:bg-pd-lime transition-colors duration-300 px-7 pb-6 pt-10 font-yoon text-black md:h-[621px] md:px-[53px] md:pt-[87px]">
+        <p class="leading-none"><span class="text-[48px] md:text-[70px]">₹2400</span><span class="text-[16px] md:text-[24px]"> per Team</span></p>
+        <h3 class="mt-12 text-[24px] md:mt-[100px] md:text-[36px]">For the Debaters</h3>
+        <p class="mt-6 max-w-[380px] text-[16px] leading-snug md:mt-[40px] md:text-[24px]">Register your squad and make your voices count.</p>
+        {% url 'registration:register_institutional' as debaters_url %}
+        {% include "sections/_shift_button.html" with href=debaters_url label="Register as a debating team" %}
+      </div>
+    </article>
+
+    {# ---------- For the Judges (left on desktop) ---------- #}
+    <article class="pd-preserve group relative md:absolute md:left-1/2 md:top-0 md:-ml-[241px] md:w-[482px]"
+             data-fee-card data-fee-slot="-1" data-fee-slot-default="-1" data-active="false" data-active-default="false" tabindex="0"
+             aria-label="For the Judges, ₹800 per person">
+      <div aria-hidden="true" class="absolute inset-x-0 top-0 bottom-[24px] rounded-[20px] bg-pd-blue group-data-[fee-slot='0']:bg-pd-card-green group-data-[fee-slot='1']:bg-pd-lime transition-colors duration-300"></div>
+      <div aria-hidden="true" class="absolute inset-x-0 top-[8px] bottom-[16px] rounded-[20px] bg-pd-lime group-data-[fee-slot='0']:bg-pd-pink group-data-[fee-slot='1']:bg-pd-card-green transition-colors duration-300"></div>
+      <div aria-hidden="true" class="absolute inset-x-0 top-[16px] bottom-[8px] rounded-[20px] bg-pd-card-green group-data-[fee-slot='0']:bg-pd-blue group-data-[fee-slot='1']:bg-pd-blue transition-colors duration-300"></div>
+      <div class="relative mt-[24px] flex flex-col rounded-[20px] bg-pd-pink group-data-[fee-slot='0']:bg-pd-lime transition-colors duration-300 px-7 pb-6 pt-10 font-yoon text-black md:h-[621px] md:px-[53px] md:pt-[87px]">
+        <p class="leading-none"><span class="text-[48px] md:text-[70px]">₹800</span><span class="text-[16px] md:text-[24px]"> per Person</span></p>
+        <h3 class="mt-12 text-[24px] md:mt-[100px] md:text-[36px]">For the Judges</h3>
+        <p class="mt-6 max-w-[380px] text-[16px] leading-snug md:mt-[40px] md:text-[24px]">Shape fairness and guide the debate.</p>
+        {% url 'registration:register_adjudicator' as judges_url %}
+        {% include "sections/_shift_button.html" with href=judges_url label="Register as an adjudicator" %}
+      </div>
+    </article>
+
+    {# ---------- For Participants only (right on desktop) ---------- #}
+    <article class="pd-preserve group relative md:absolute md:left-1/2 md:top-0 md:-ml-[241px] md:w-[482px]"
+             data-fee-card data-fee-slot="1" data-fee-slot-default="1" data-active="false" data-active-default="false" tabindex="0"
+             aria-label="For participants only, ₹800 per head for 4 days">
+      <div aria-hidden="true" class="absolute inset-x-0 top-0 bottom-[24px] rounded-[20px] bg-pd-blue group-data-[fee-slot='0']:bg-pd-card-green group-data-[fee-slot='1']:bg-pd-lime transition-colors duration-300"></div>
+      <div aria-hidden="true" class="absolute inset-x-0 top-[8px] bottom-[16px] rounded-[20px] bg-pd-lime group-data-[fee-slot='0']:bg-pd-pink group-data-[fee-slot='1']:bg-pd-card-green transition-colors duration-300"></div>
+      <div aria-hidden="true" class="absolute inset-x-0 top-[16px] bottom-[8px] rounded-[20px] bg-pd-card-green group-data-[fee-slot='0']:bg-pd-blue group-data-[fee-slot='1']:bg-pd-blue transition-colors duration-300"></div>
+      <div class="relative mt-[24px] flex flex-col rounded-[20px] bg-pd-pink group-data-[fee-slot='0']:bg-pd-lime transition-colors duration-300 px-7 pb-6 pt-10 font-yoon text-black md:h-[621px] md:px-[53px] md:pt-[87px]">
+        <p class="leading-none"><span class="text-[48px] md:text-[70px]">₹800</span><span class="text-[16px] md:text-[24px]"> per Head for 4 days</span></p>
+        <h3 class="mt-12 text-[24px] md:mt-[100px] md:text-[36px]">For Participants only</h3>
+        <p class="mt-6 max-w-[380px] text-[16px] leading-snug md:mt-[40px] md:text-[24px]">Stay close to the action, live the debate experience.</p>
+        {# TODO: there is no participant registration form yet — point this at it once it exists #}
+        {% include "sections/_shift_button.html" with href="#" label="Register as a participant" %}
+      </div>
+    </article>
+  </div>
+</section>

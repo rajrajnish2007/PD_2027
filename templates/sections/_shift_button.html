@@ -1,0 +1,17 @@
+{% load static %}
+{% comment %} REGISTER button + arrow tile. Red on the centred card, black on the side cards
+   (switches with the card's data-active attribute). Hover animation: "shift button". {% endcomment %}
+<a href="{{ href }}" aria-label="{{ label }}"
+   class="mx-auto mt-10 inline-flex items-center gap-3 outline-none md:mt-auto"
+   data-shift>
+  <span data-shift-pill
+        class="inline-flex h-[48px] w-[200px] items-center justify-center rounded-[20px] font-milker text-[24px] leading-none uppercase text-white transition-colors duration-300 group-data-[active=true]:bg-pd-red group-data-[active=false]:bg-black md:h-[59px] md:w-[259px] md:text-[32px]">
+    Register
+  </span>
+  <span class="relative size-[48px] shrink-0 md:size-[59px]" data-shift-icon>
+    <img src="{% static 'pd/img/sections/arrow-big.svg' %}" alt="" width="59" height="59"
+         class="absolute inset-0 size-full transition-opacity duration-300 group-data-[active=false]:opacity-0">
+    <img src="{% static 'pd/img/sections/arrow-small.svg' %}" alt="" width="24" height="24"
+         class="absolute inset-0 size-full transition-opacity duration-300 group-data-[active=true]:opacity-0">
+  </span>
+</a>

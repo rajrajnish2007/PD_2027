@@ -1,0 +1,12 @@
+{
+  "name": "pd-2027",
+  "private": true,
+  "scripts": {
+    "css": "tailwindcss -i tailwind/input.css -o pd/static/pd/css/tailwind.css --minify",
+    "css:watch": "tailwindcss -i tailwind/input.css -o pd/static/pd/css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "tailwindcss": "^4.3.5"
+  }
+}

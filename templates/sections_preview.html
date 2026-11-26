@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PD 2027 — Prizes to Footer preview</title>
+  {% include "partials/pd_head.html" %}
+</head>
+<body class="bg-black antialiased">
+  {# Stand-in for the sections above (hero, highlights…) built by the rest of the team #}
+  <div class="flex h-[60vh] items-center justify-center bg-black font-milker text-[24px] uppercase text-white/30">
+    ↓ Hero &amp; highlights go here ↓
+  </div>
+
+  {% include "sections/prizes.html" %}
+  {% include "sections/fees.html" %}
+  {% include "sections/faq.html" %}
+  {% include "sections/footer.html" %}
+
+  {% include "partials/pd_scripts.html" %}
+</body>
+</html>

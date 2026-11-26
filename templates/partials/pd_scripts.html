@@ -1,0 +1,14 @@
+{% load static %}
+{# Include once, just before </body>. GSAP (bundled locally) + the section animations. #}
+{# Three-circle cursor (site-wide). Colours from the Figma note: lime, pink, green. #}
+<div aria-hidden="true" class="pointer-events-none fixed inset-0 z-[9999] hidden" data-pd-cursor>
+  <span class="absolute left-0 top-0 size-9 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pd-green" data-pd-cursor-dot="2"></span>
+  <span class="absolute left-0 top-0 size-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pd-pink" data-pd-cursor-dot="1"></span>
+  <span class="absolute left-0 top-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pd-lime" data-pd-cursor-dot="0"></span>
+</div>
+
+<script src="{% static 'pd/vendor/gsap/gsap.min.js' %}"></script>
+<script src="{% static 'pd/vendor/gsap/ScrollTrigger.min.js' %}"></script>
+<script src="{% static 'pd/vendor/gsap/SplitText.min.js' %}"></script>
+<script src="{% static 'pd/vendor/gsap/Observer.min.js' %}"></script>
+<script src="{% static 'pd/js/sections.js' %}"></script>

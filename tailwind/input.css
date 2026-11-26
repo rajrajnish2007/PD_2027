@@ -1,0 +1,96 @@
+/*
+  Tailwind source for the PD 2027 site.
+  Rebuild after changing any classes in templates/:
+    npx @tailwindcss/cli -i tailwind/input.css -o pd/static/pd/css/tailwind.css --minify
+  (add --watch while you work)
+*/
+@import "tailwindcss";
+
+/* Scan Django templates (paths are relative to this file) */
+@source "../templates";
+@source "../pd/templates";
+@source "../pd/static/pd/js";
+
+/* ---------- Fonts (from the Figma stylesheet) ----------
+   Drop the licensed font files into pd/static/pd/fonts/ with these names.
+   Until they exist, the Google Fonts fallbacks loaded in partials/pd_head.html are used. */
+@font-face {
+  font-family: "Milker";
+  src: url("../fonts/Milker-Regular.woff2") format("woff2"),
+       url("../fonts/Milker-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "YDYoonche";
+  src: url("../fonts/YDYoonche-M.woff2") format("woff2"),
+       url("../fonts/YDYoonche-M.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Design tokens (Figma "Stylesheet" frame) ---------- */
+@theme {
+  --font-milker: "Milker", "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-yoon: "YDYoonche", "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  /* Stylesheet swatches */
+  --color-pd-lime: #c1ff00;
+  --color-pd-pink: #ff16be;
+  --color-pd-green: #00a65b;
+  --color-pd-violet: #cd16ff;
+  --color-pd-blue: #4461ff;
+  --color-pd-cream: #faf3e0;
+  --color-pd-ink: #161616;
+
+  /* Extra colours used inside the frames */
+  --color-pd-card-green: #31a362;
+  --color-pd-emerald: #009425;
+  --color-pd-teal: #007d9f;
+  --color-pd-red: #ff2c2c;
+  --color-pd-sand: #f8e7d3;
+  --color-pd-bone: #eeecd9;
+}
+
+@layer base {
+  /* Milker is a single heavy style. The fallback (Archivo) is pushed to its
+     expanded/black cut so it looks close; synthesis is off so Milker never gets faux-bolded. */
+  .font-milker {
+    font-weight: 900;
+    font-stretch: 125%;
+    font-synthesis: none;
+  }
+  .font-yoon {
+    font-weight: 500;
+    font-synthesis: none;
+  }
+}
+
+@layer components {
+  /* Figma "GLASS" effect on the prize cards: 50% colour fill + 4px blur + light edge */
+  .pd-glass {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.28),
+      inset 0 0 0 1px rgb(255 255 255 / 0.12);
+  }
+  /* 3D context for the fee-card flip */
+  .pd-3d {
+    perspective: 1600px;
+  }
+  .pd-preserve {
+    transform-style: preserve-3d;
+  }
+}
+
+/* Custom cursor: only hide the system cursor when the JS cursor is running on a mouse */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html.pd-has-cursor,
+  html.pd-has-cursor a,
+  html.pd-has-cursor button {
+    cursor: none;
+  }
+}

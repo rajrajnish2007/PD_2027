@@ -1,0 +1,54 @@
+{% load static %}
+{% comment %} ============================================================
+   PRIZES — Figma "Dev Handoff" › Desktop screen › frame 3 (185:467)
+   Animation: fan card carousel (ref: framer.com/marketplace/components/fan-card-carousel)
+   + wave title (ref: motion-text-fx). Driven by pd/static/pd/js/sections.js
+   ============================================================ {% endcomment %}
+<section id="prizes" class="relative overflow-hidden bg-black [--s:1]" data-pd-fan aria-labelledby="prizes-title">
+  {# Title sits under the fan on desktop, above it on mobile (as in the iPhone frames) #}
+  <h2 id="prizes-title"
+      class="relative z-20 px-5 pt-16 text-center font-milker text-[28px] leading-none uppercase text-pd-cream md:absolute md:inset-x-0 md:top-[calc(969px*var(--s))] md:p-0 md:text-[max(32px,calc(70px*var(--s)))]"
+      data-pd-wave>
+    Win exciting prizes!!!
+  </h2>
+
+  <div class="relative mx-auto h-[calc(1000px*var(--s))] max-w-[1440px] md:h-[calc(1123px*var(--s))]">
+    {# Stage = the 604×779 centre-card box. Scaled as a whole so the fan keeps its proportions on small screens. #}
+    <div class="absolute left-1/2 top-[calc(40px*var(--s))] h-[779px] w-[604px] origin-top -translate-x-1/2 scale-(--s) outline-none md:top-[calc(28px*var(--s))]"
+         data-fan-stage
+         tabindex="0"
+         role="region"
+         aria-roledescription="carousel"
+         aria-label="Prizes. Use the left and right arrow keys, swipe, or click a card.">
+
+      {# Decorative glass cards at the far ends of the fan (Rectangle 5 / Rectangle 9 in Figma) #}
+      <div aria-hidden="true" class="pd-glass absolute inset-0 rounded-[20px] bg-pd-emerald/50" data-fan-deco="-2"></div>
+      <div aria-hidden="true" class="pd-glass absolute inset-0 rounded-[20px] bg-pd-teal/50" data-fan-deco="2"></div>
+
+      {# Prize cards. Order matters: the middle one (data-fan-start) is centred first. #}
+      <article class="absolute inset-0 cursor-pointer select-none" data-fan-card aria-roledescription="slide" aria-label="Best 3 Speaker Award, ₹24,000">
+        <div class="pd-glass flex h-full flex-col rounded-[20px] bg-pd-pink/50 px-[70px] pt-[90px] font-yoon text-white" data-fan-inner>
+          <p class="text-[36px] leading-tight">Best 3 speaker<br>Award</p>
+          <p class="mt-[56px] text-[70px] leading-none">₹24,000</p>
+          <p class="mt-[150px] max-w-[440px] text-[24px] leading-snug">The top 3 speaker walks away with recognition and ₹24,000 worth of rewards.</p>
+        </div>
+      </article>
+
+      <article class="absolute inset-0 cursor-pointer select-none" data-fan-card data-fan-start aria-roledescription="slide" aria-label="Winner, ₹80,000">
+        <div class="pd-glass flex h-full flex-col rounded-[20px] bg-pd-card-green/50 px-[70px] pt-[90px] font-yoon text-white" data-fan-inner>
+          <p class="text-[36px] leading-tight">Winner</p>
+          <p class="mt-[56px] text-[70px] leading-none">₹80,000</p>
+          <p class="mt-[150px] max-w-[440px] text-[24px] leading-snug">The ultimate debate champions claims the spotlight - and a grand prize of ₹80,000.</p>
+        </div>
+      </article>
+
+      <article class="absolute inset-0 cursor-pointer select-none" data-fan-card aria-roledescription="slide" aria-label="Best 3 Adjudicator Award, ₹1,30,000">
+        <div class="pd-glass flex h-full flex-col rounded-[20px] bg-pd-lime/50 px-[70px] pt-[90px] font-yoon text-white" data-fan-inner>
+          <p class="text-[36px] leading-tight">Best 3 Adjudicator<br>Award</p>
+          <p class="mt-[56px] text-[70px] leading-none">₹1,30,000</p>
+          <p class="mt-[150px] max-w-[440px] text-[24px] leading-snug">The top 3 Adjudicators will share prestige and prizes worth ₹1,30,000 in total.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

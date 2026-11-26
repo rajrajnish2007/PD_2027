@@ -1,0 +1,89 @@
+{% load static %}
+{% comment %} ============================================================
+   FAQ — Figma "Dev Handoff" › frame 5, top half (185:511)
+   Animations: wave title (ref: motion-text-fx), accordion (ref: framer.com/marketplace/components/faqs)
+   The Figma file only has placeholder text here; these answers are drafted from facts
+   elsewhere in the design (fees, format, N+1 rule, contact). Edit freely.
+   ============================================================ {% endcomment %}
+<section id="faq" class="bg-black px-5 pt-16 md:px-10 md:pt-[133px]" aria-labelledby="faq-title">
+  <h2 id="faq-title" class="text-center font-milker text-[28px] leading-none uppercase text-pd-cream md:text-[70px]" data-pd-wave>
+    Got any questions
+  </h2>
+
+  <div class="mx-auto mt-10 flex max-w-[1158px] flex-col gap-[18px] md:mt-[104px]" data-pd-faq>
+    <div class="overflow-hidden rounded-[20px] bg-pd-pink/33" data-faq-item data-faq-open>
+      <h3>
+        <button type="button" id="faq-q-1" aria-controls="faq-a-1" aria-expanded="true" data-faq-trigger
+                class="flex min-h-[64px] w-full items-center justify-between gap-6 rounded-[20px] px-6 py-4 text-left font-yoon text-[16px] text-white transition-colors duration-300 hover:bg-pd-pink/20 aria-expanded:bg-pd-pink/33 md:min-h-[84px] md:px-9 md:text-[24px]">
+          <span>What is the debate format?</span>
+          <img src="{% static 'pd/img/sections/chevron-down.svg' %}" alt="" width="28" height="16" class="h-[16px] w-[28px] shrink-0" data-faq-icon>
+        </button>
+      </h3>
+      <div id="faq-a-1" role="region" aria-labelledby="faq-q-1" class="overflow-hidden" data-faq-panel>
+        <p class="px-6 pb-8 pt-4 font-yoon text-[16px] leading-snug text-white md:px-9 md:pb-12 md:text-[24px]" data-faq-answer>
+          It's the Asian Parliamentary format: a 3v3 face-off where teamwork and quick thinking decide who takes the floor.
+        </p>
+      </div>
+    </div>
+
+    <div class="overflow-hidden rounded-[20px] bg-pd-pink/33" data-faq-item>
+      <h3>
+        <button type="button" id="faq-q-2" aria-controls="faq-a-2" aria-expanded="false" data-faq-trigger
+                class="flex min-h-[64px] w-full items-center justify-between gap-6 rounded-[20px] px-6 py-4 text-left font-yoon text-[16px] text-white transition-colors duration-300 hover:bg-pd-pink/20 aria-expanded:bg-pd-pink/33 md:min-h-[84px] md:px-9 md:text-[24px]">
+          <span>How much does it cost to register?</span>
+          <img src="{% static 'pd/img/sections/chevron-down.svg' %}" alt="" width="28" height="16" class="h-[16px] w-[28px] shrink-0" data-faq-icon>
+        </button>
+      </h3>
+      <div id="faq-a-2" role="region" aria-labelledby="faq-q-2" class="overflow-hidden" data-faq-panel>
+        <p class="px-6 pb-8 pt-4 font-yoon text-[16px] leading-snug text-white md:px-9 md:pb-12 md:text-[24px]" data-faq-answer>
+          ₹2400 per debating team, ₹800 per adjudicator, and ₹800 per head for participants who want to be there for all 4 days.
+        </p>
+      </div>
+    </div>
+
+    <div class="overflow-hidden rounded-[20px] bg-pd-pink/33" data-faq-item>
+      <h3>
+        <button type="button" id="faq-q-3" aria-controls="faq-a-3" aria-expanded="false" data-faq-trigger
+                class="flex min-h-[64px] w-full items-center justify-between gap-6 rounded-[20px] px-6 py-4 text-left font-yoon text-[16px] text-white transition-colors duration-300 hover:bg-pd-pink/20 aria-expanded:bg-pd-pink/33 md:min-h-[84px] md:px-9 md:text-[24px]">
+          <span>What is the N+1 adjudicator rule?</span>
+          <img src="{% static 'pd/img/sections/chevron-down.svg' %}" alt="" width="28" height="16" class="h-[16px] w-[28px] shrink-0" data-faq-icon>
+        </button>
+      </h3>
+      <div id="faq-a-3" role="region" aria-labelledby="faq-q-3" class="overflow-hidden" data-faq-panel>
+        <p class="px-6 pb-8 pt-4 font-yoon text-[16px] leading-snug text-white md:px-9 md:pb-12 md:text-[24px]" data-faq-answer>
+          Institutions bring one more adjudicator than the number of teams they send. The strict N+1 rule keeps judging fair, so every argument gets the verdict it deserves.
+        </p>
+      </div>
+    </div>
+
+    <div class="overflow-hidden rounded-[20px] bg-pd-pink/33" data-faq-item>
+      <h3>
+        <button type="button" id="faq-q-4" aria-controls="faq-a-4" aria-expanded="false" data-faq-trigger
+                class="flex min-h-[64px] w-full items-center justify-between gap-6 rounded-[20px] px-6 py-4 text-left font-yoon text-[16px] text-white transition-colors duration-300 hover:bg-pd-pink/20 aria-expanded:bg-pd-pink/33 md:min-h-[84px] md:px-9 md:text-[24px]">
+          <span>What can we win?</span>
+          <img src="{% static 'pd/img/sections/chevron-down.svg' %}" alt="" width="28" height="16" class="h-[16px] w-[28px] shrink-0" data-faq-icon>
+        </button>
+      </h3>
+      <div id="faq-a-4" role="region" aria-labelledby="faq-q-4" class="overflow-hidden" data-faq-panel>
+        <p class="px-6 pb-8 pt-4 font-yoon text-[16px] leading-snug text-white md:px-9 md:pb-12 md:text-[24px]" data-faq-answer>
+          The winning team takes home ₹80,000. The best 3 speakers share ₹24,000 worth of rewards, and the best 3 adjudicators share prizes worth ₹1,30,000.
+        </p>
+      </div>
+    </div>
+
+    <div class="overflow-hidden rounded-[20px] bg-pd-pink/33" data-faq-item>
+      <h3>
+        <button type="button" id="faq-q-5" aria-controls="faq-a-5" aria-expanded="false" data-faq-trigger
+                class="flex min-h-[64px] w-full items-center justify-between gap-6 rounded-[20px] px-6 py-4 text-left font-yoon text-[16px] text-white transition-colors duration-300 hover:bg-pd-pink/20 aria-expanded:bg-pd-pink/33 md:min-h-[84px] md:px-9 md:text-[24px]">
+          <span>Who do I contact with other questions?</span>
+          <img src="{% static 'pd/img/sections/chevron-down.svg' %}" alt="" width="28" height="16" class="h-[16px] w-[28px] shrink-0" data-faq-icon>
+        </button>
+      </h3>
+      <div id="faq-a-5" role="region" aria-labelledby="faq-q-5" class="overflow-hidden" data-faq-panel>
+        <p class="px-6 pb-8 pt-4 font-yoon text-[16px] leading-snug text-white md:px-9 md:pb-12 md:text-[24px]" data-faq-answer>
+          Reach out to Karan Saab (Web Head) at <a href="tel:+918292967325" class="underline underline-offset-4">+91 82929 67325</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

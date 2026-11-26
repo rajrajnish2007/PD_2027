@@ -1,0 +1,51 @@
+{% load static %}
+{% comment %} ============================================================
+   FOOTER — Figma "Dev Handoff" › frame 5, bottom half (185:511)
+   ============================================================ {% endcomment %}
+<footer id="contact-us" class="bg-black px-5 pb-24 pt-16 text-pd-cream md:px-10 md:pb-[170px] md:pt-[105px]">
+  <hr class="mx-auto max-w-[1283px] border-0 border-t border-white/50">
+
+  <div class="mx-auto mt-14 flex max-w-[972px] flex-col items-center gap-10 md:mt-[105px] md:flex-row md:items-center md:justify-between md:gap-0">
+    {# Alcheringa brand lock-up #}
+    <a href="#" class="flex items-center gap-4" aria-label="Alcheringa, IIT Guwahati">
+      <img src="{% static 'pd/img/sections/alcheringa-logo.svg' %}" alt="" width="62" height="62" class="size-[48px] md:size-[62px]">
+      <span class="text-left">
+        <span class="block font-milker text-[24px] leading-[1.092] uppercase md:text-[32px]">Alcheringa</span>
+        <span class="block font-yoon text-[24px] leading-[1.092] md:text-[32px]">IIT Guwahati</span>
+      </span>
+    </a>
+
+    {# Social links — TODO: replace "#" with the official Alcheringa profile URLs #}
+    <div class="flex w-[168px] flex-col items-center gap-[19px]">
+      <p class="font-yoon text-[14px] leading-[1.092]">Follow us</p>
+      <ul class="flex items-center gap-4">
+        <li><a href="#" target="_blank" rel="noopener" aria-label="Instagram" class="block transition-transform duration-300 hover:-translate-y-1"><img src="{% static 'pd/img/sections/instagram.svg' %}" alt="" width="30" height="30"></a></li>
+        <li><a href="#" target="_blank" rel="noopener" aria-label="YouTube" class="block transition-transform duration-300 hover:-translate-y-1"><img src="{% static 'pd/img/sections/youtube.svg' %}" alt="" width="30" height="30"></a></li>
+        <li><a href="#" target="_blank" rel="noopener" aria-label="LinkedIn" class="block transition-transform duration-300 hover:-translate-y-1"><img src="{% static 'pd/img/sections/linkedin.svg' %}" alt="" width="30" height="30"></a></li>
+        <li><a href="#" target="_blank" rel="noopener" aria-label="X (Twitter)" class="block transition-transform duration-300 hover:-translate-y-1"><img src="{% static 'pd/img/sections/x.svg' %}" alt="" width="30" height="30"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  {# Links #}
+  <nav aria-labelledby="footer-links" class="mt-14 flex flex-col items-center gap-6 md:mt-[87px]">
+    <h2 id="footer-links" class="font-milker text-[32px] leading-[1.1] tracking-[0.05em] uppercase text-pd-sand md:text-[48px]">Links</h2>
+    <ul class="flex flex-col items-center gap-[5px] font-yoon text-[16px] leading-[1.7] tracking-[0.02em] text-pd-sand md:text-[20px]">
+      <li><a href="#about-us" class="transition-colors hover:text-pd-lime">About us</a></li>
+      <li><a href="#highlights" class="transition-colors hover:text-pd-lime">Modules and Competitions</a></li>
+      <li><a href="#testimonials" class="transition-colors hover:text-pd-lime">Testimonials</a></li>
+      <li><a href="#faq" class="transition-colors hover:text-pd-lime">FAQs</a></li>
+    </ul>
+  </nav>
+
+  {# Contact #}
+  <address class="mt-14 flex flex-col items-center not-italic text-pd-bone md:mt-[105px]">
+    <h2 class="font-milker text-[32px] leading-[1.1] tracking-[0.05em] uppercase md:text-[48px]">Contact us</h2>
+    <p class="mt-[30px] font-yoon text-[16px] leading-[1.4] tracking-[0.02em] md:text-[20px]">Karan Saab</p>
+    <p class="font-yoon text-[16px] leading-[1.4] tracking-[0.02em] md:text-[20px]">Web Head</p>
+    <a href="tel:+918292967325" class="mt-[2px] flex items-center gap-[6px] font-yoon text-[16px] leading-[1.4] tracking-[0.02em] transition-colors hover:text-pd-lime md:text-[20px]">
+      <img src="{% static 'pd/img/sections/phone.svg' %}" alt="" width="20" height="23">
+      +91 82929 67325
+    </a>
+  </address>
+</footer>
