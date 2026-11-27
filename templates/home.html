@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alcheringa Parliamentary Debate 2027</title>
+    <link rel="stylesheet" href="{% static 'pd/css/output.css' %}">
+</head>
+<body class="bg-black text-white min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-md w-full bg-[#330426] border border-[#5C1044] rounded-3xl p-8 text-center space-y-6">
+        <h1 class="text-2xl font-bold tracking-wide">Alcheringa PD 2027</h1>
+        
+        {% if messages %}
+        <div class="space-y-2">
+            {% for message in messages %}
+            <div class="p-4 rounded-xl text-sm font-semibold bg-[#C1FF00]/15 border border-[#C1FF00] text-[#C1FF00]">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <p class="text-white/70 text-sm">Select a registration form to proceed:</p>
+
+        <div class="flex flex-col gap-3">
+            <a href="{% url 'registration:register_institutional' %}" class="py-3 px-6 rounded-2xl bg-[#FF3EBA] hover:bg-[#E636A7] text-white font-bold transition-all">
+                Institutional Team Registration
+            </a>
+            <a href="{% url 'registration:register_cross' %}" class="py-3 px-6 rounded-2xl bg-[#5C1044] hover:bg-[#6e1553] text-white font-semibold transition-all">
+                Cross / Open Registration
+            </a>
+            <a href="{% url 'registration:register_adjudicator' %}" class="py-3 px-6 rounded-2xl bg-[#5C1044] hover:bg-[#6e1553] text-white font-semibold transition-all">
+                Independent Adjudicator Registration
+            </a>
+        </div>
+    </div>
+</body>
+</html>

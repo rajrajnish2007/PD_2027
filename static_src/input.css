@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Milker';
+  src: url('../fonts/Milker.otf') format('opentype'),
+       url('/static/pd/fonts/Milker.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'YDYoonche';
+  src: local('YoonA YoonChe'), local('YoonA YoonChe Medium'), local('YoonA YoonChe Bold'), local('YDYoonche'), local('YDYoonche M'), local('YDYooncheB');
+  font-display: swap;
+}
+
+@layer base {
+  html, body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'YDYoonche', 'yoona-yoonche', 'YoonA YoonChe', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input, button, select, textarea {
+    font-family: 'YDYoonche', 'yoona-yoonche', 'YoonA YoonChe', sans-serif;
+  }
+
+  input::placeholder {
+    font-family: 'YDYoonche', 'yoona-yoonche', 'YoonA YoonChe', sans-serif;
+  }
+}

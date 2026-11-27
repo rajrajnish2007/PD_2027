@@ -75,7 +75,7 @@ def register_adjudicator(request):
                 fail_silently=True,
             )
 
-            return redirect("registration:register_adjudicator")
+            return redirect("registration:home")
 
     else:
         form = IndependentAdjudicatorForm()

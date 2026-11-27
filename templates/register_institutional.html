@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}Institutional Team Registration - Alcheringa PD 2027{% endblock %}
+
+{% block tab_institutional_class %}
+text-[#C1FF00] font-semibold
+{% endblock %}
+
+{% block form_content %}
+<div class="mt-4 sm:mt-6">
+    <p class="text-white text-xs sm:text-sm md:text-base font-normal mb-3 sm:mb-5">
+        Fields Marked <span class="text-[#FF3EBA] font-bold">*</span> are mandatory
+    </p>
+
+    <form method="POST" action="{% url 'registration:register_institutional' %}" class="space-y-2.5 sm:space-y-3" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div class="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-[#FF3EBA]/15 border border-[#FF3EBA] text-white text-xs sm:text-sm space-y-1">
+            {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- 1. Name of Institution (Mandatory) -->
+        <div>
+            <input type="text" 
+                   name="institution_name" 
+                   id="id_institution_name"
+                   value="{{ form.institution_name.value|default_if_none:'' }}"
+                   placeholder="Name of Institution*" 
+                   class="w-full h-[44px] sm:h-[48px] md:h-[50px] px-3.5 sm:px-5 md:px-6 rounded-xl sm:rounded-2xl bg-[#5C1044] text-white placeholder-[#E8A2D7] text-xs sm:text-sm md:text-base placeholder:text-[11px] sm:placeholder:text-sm md:placeholder:text-base focus:outline-none focus:ring-2 focus:ring-[#FF3EBA] border border-transparent transition-all">
+            {% if form.institution_name.errors %}
+            <p class="mt-1 text-[11px] sm:text-xs text-[#FF56C2] px-2">{{ form.institution_name.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- 2. Number of Team Slot(s) Required (Mandatory) -->
+        <div>
+            <input type="number" 
+                   name="team_slots" 
+                   id="id_team_slots"
+                   min="0"
+                   value="{{ form.team_slots.value|default_if_none:'' }}"
+                   placeholder="Number of Team Slot(s) Required*" 
+                   class="w-full h-[44px] sm:h-[48px] md:h-[50px] px-3.5 sm:px-5 md:px-6 rounded-xl sm:rounded-2xl bg-[#5C1044] text-white placeholder-[#E8A2D7] text-xs sm:text-sm md:text-base placeholder:text-[11px] sm:placeholder:text-sm md:placeholder:text-base focus:outline-none focus:ring-2 focus:ring-[#FF3EBA] border border-transparent transition-all">
+            {% if form.team_slots.errors %}
+            <p class="mt-1 text-[11px] sm:text-xs text-[#FF56C2] px-2">{{ form.team_slots.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- 3. Number of Adjudicator Slot(s) Required (Mandatory) -->
+        <div>
+            <input type="number" 
+                   name="adjudicator_slots" 
+                   id="id_adjudicator_slots"
+                   min="0"
+                   value="{{ form.adjudicator_slots.value|default_if_none:'' }}"
+                   placeholder="Number of Adjudicator Slot(s) Required*" 
+                   class="w-full h-[44px] sm:h-[48px] md:h-[50px] px-3.5 sm:px-5 md:px-6 rounded-xl sm:rounded-2xl bg-[#5C1044] text-white placeholder-[#E8A2D7] text-xs sm:text-sm md:text-base placeholder:text-[11px] sm:placeholder:text-sm md:placeholder:text-base focus:outline-none focus:ring-2 focus:ring-[#FF3EBA] border border-transparent transition-all">
+            {% if form.adjudicator_slots.errors %}
+            <p class="mt-1 text-[11px] sm:text-xs text-[#FF56C2] px-2">{{ form.adjudicator_slots.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- 4. Team Representative(s) Name (Mandatory) -->
+        <div>
+            <input type="text" 
+                   name="team_rep_names" 
+                   id="id_team_rep_names"
+                   value="{{ form.team_rep_names.value|default_if_none:'' }}"
+                   placeholder="Team Representative(s) Name*" 
+                   class="w-full h-[44px] sm:h-[48px] md:h-[50px] px-3.5 sm:px-5 md:px-6 rounded-xl sm:rounded-2xl bg-[#5C1044] text-white placeholder-[#E8A2D7] text-xs sm:text-sm md:text-base placeholder:text-[11px] sm:placeholder:text-sm md:placeholder:text-base focus:outline-none focus:ring-2 focus:ring-[#FF3EBA] border border-transparent transition-all">
+            {% if form.team_rep_names.errors %}
+            <p class="mt-1 text-[11px] sm:text-xs text-[#FF56C2] px-2">{{ form.team_rep_names.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- 5. Contact Number (Mandatory) -->
+        <div>
+            <input type="tel" 
+                   name="contact_number" 
+                   id="id_contact_number"
+                   maxlength="15"
+                   inputmode="tel"
+                   value="{{ form.contact_number.value|default_if_none:'' }}"
+                   placeholder="Contact Number*" 
+                   class="w-full h-[44px] sm:h-[48px] md:h-[50px] px-3.5 sm:px-5 md:px-6 rounded-xl sm:rounded-2xl bg-[#5C1044] text-white placeholder-[#E8A2D7] text-xs sm:text-sm md:text-base placeholder:text-[11px] sm:placeholder:text-sm md:placeholder:text-base focus:outline-none focus:ring-2 focus:ring-[#FF3EBA] border border-transparent transition-all">
+            {% if form.contact_number.errors %}
+            <p class="mt-1 text-[11px] sm:text-xs text-[#FF56C2] px-2">{{ form.contact_number.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- 6. Email ID (Mandatory) with label above input as in Figma -->
+        <div>
+            <label for="id_email" class="block text-white text-xs sm:text-sm md:text-base font-semibold mb-1 sm:mb-1.5 px-0.5">
+                Email ID <span class="text-[#FF3EBA] font-bold">*</span>
+            </label>
+            <input type="email" 
+                   name="email" 
+                   id="id_email"
+                   value="{{ form.email.value|default_if_none:'' }}"
+                   placeholder="Preferably Debate Society of Institution" 
+                   class="w-full h-[44px] sm:h-[48px] md:h-[50px] px-3.5 sm:px-5 md:px-6 rounded-xl sm:rounded-2xl bg-[#5C1044] text-white placeholder-[#E8A2D7] text-xs sm:text-sm md:text-base placeholder:text-[11px] sm:placeholder:text-sm md:placeholder:text-base focus:outline-none focus:ring-2 focus:ring-[#FF3EBA] border border-transparent transition-all">
+            {% if form.email.errors %}
+            <p class="mt-1 text-[11px] sm:text-xs text-[#FF56C2] px-2">{{ form.email.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- 7. Alternate Point of Contact (Name) - Optional as per Backend -->
+        <div>
+            <input type="text" 
+                   name="alt_contact_name" 
+                   id="id_alt_contact_name"
+                   value="{{ form.alt_contact_name.value|default_if_none:'' }}"
+                   placeholder="Alternate Point of Contact (Name)" 
+                   class="w-full h-[44px] sm:h-[48px] md:h-[50px] px-3.5 sm:px-5 md:px-6 rounded-xl sm:rounded-2xl bg-[#5C1044] text-white placeholder-[#E8A2D7] text-xs sm:text-sm md:text-base placeholder:text-[11px] sm:placeholder:text-sm md:placeholder:text-base focus:outline-none focus:ring-2 focus:ring-[#FF3EBA] border border-transparent transition-all">
+            {% if form.alt_contact_name.errors %}
+            <p class="mt-1 text-[11px] sm:text-xs text-[#FF56C2] px-2">{{ form.alt_contact_name.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- 8. Alternate Point of Contact (Contact Number) - Optional as per Backend -->
+        <div>
+            <input type="tel" 
+                   name="alt_contact_number" 
+                   id="id_alt_contact_number"
+                   maxlength="15"
+                   inputmode="tel"
+                   value="{{ form.alt_contact_number.value|default_if_none:'' }}"
+                   placeholder="Alternate Point of Contact (Contact Number)" 
+                   class="w-full h-[44px] sm:h-[48px] md:h-[50px] px-3.5 sm:px-5 md:px-6 rounded-xl sm:rounded-2xl bg-[#5C1044] text-white placeholder-[#E8A2D7] text-xs sm:text-sm md:text-base placeholder:text-[11px] sm:placeholder:text-sm md:placeholder:text-base focus:outline-none focus:ring-2 focus:ring-[#FF3EBA] border border-transparent transition-all">
+            {% if form.alt_contact_number.errors %}
+            <p class="mt-1 text-[11px] sm:text-xs text-[#FF56C2] px-2">{{ form.alt_contact_number.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- 9. Alternate Point of Contact (Email ID) - Optional as per Backend -->
+        <div>
+            <input type="email" 
+                   name="alt_contact_email" 
+                   id="id_alt_contact_email"
+                   value="{{ form.alt_contact_email.value|default_if_none:'' }}"
+                   placeholder="Alternate Point of Contact (Email ID)" 
+                   class="w-full h-[44px] sm:h-[48px] md:h-[50px] px-3.5 sm:px-5 md:px-6 rounded-xl sm:rounded-2xl bg-[#5C1044] text-white placeholder-[#E8A2D7] text-xs sm:text-sm md:text-base placeholder:text-[11px] sm:placeholder:text-sm md:placeholder:text-base focus:outline-none focus:ring-2 focus:ring-[#FF3EBA] border border-transparent transition-all">
+            {% if form.alt_contact_email.errors %}
+            <p class="mt-1 text-[11px] sm:text-xs text-[#FF56C2] px-2">{{ form.alt_contact_email.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Register Button -->
+        <div class="pt-2 sm:pt-3">
+            <button type="submit" 
+                    class="w-full sm:w-auto px-8 sm:px-10 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-[#FF3EBA] hover:bg-[#E636A7] text-white font-extrabold text-sm sm:text-base md:text-lg tracking-wider transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-pink-950/40 cursor-pointer">
+                REGISTER
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

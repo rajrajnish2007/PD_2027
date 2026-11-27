@@ -6,5 +6,4 @@ env/
 .venv/
 db.sqlite3
 __pycache__/
-templates/home.html
-templates/register_institutional.html
+node_modules/

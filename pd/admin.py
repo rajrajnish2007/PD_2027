@@ -4,7 +4,27 @@ from django.contrib import admin
 #RAJNISH START
 from .models import InstitutionalTeam
 
-admin.site.register(InstitutionalTeam)
+
+@admin.register(InstitutionalTeam)
+class InstitutionalTeamAdmin(admin.ModelAdmin):
+    list_display = (
+        'institution_name',
+        'team_rep_names',
+        'team_slots',
+        'adjudicator_slots',
+        'contact_number',
+        'email',
+        'created_at',
+    )
+    search_fields = (
+        'institution_name',
+        'team_rep_names',
+        'contact_number',
+        'email',
+    )
+    list_filter = ('created_at',)
+    ordering = ('-created_at',)
+    readonly_fields = ('created_at',)
 
 # Ashmitha START
 from .models import IndependentAdjudicator
